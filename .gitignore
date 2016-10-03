@@ -34,4 +34,5 @@ bower_components
 
 #intellij
 .idea
+.idea/*.xml
 

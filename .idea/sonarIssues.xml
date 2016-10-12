@@ -68,6 +68,11 @@
             <set />
           </value>
         </entry>
+        <entry key="$PROJECT_DIR$/app/json-server/public/views/menu.html">
+          <value>
+            <set />
+          </value>
+        </entry>
         <entry key="$PROJECT_DIR$/app/menu.html">
           <value>
             <set />
@@ -138,7 +143,22 @@
             <set />
           </value>
         </entry>
+        <entry key="$PROJECT_DIR$/dist/index.html">
+          <value>
+            <set />
+          </value>
+        </entry>
         <entry key="$PROJECT_DIR$/dist/menu.html">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/dist/views/aboutus.html">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/dist/views/menu.html">
           <value>
             <set />
           </value>
@@ -179,6 +199,11 @@
           </value>
         </entry>
         <entry key="$PROJECT_DIR$/../CombinerFun/src/main/java/com/happyspace/combiner/GenerationCombiner.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../CombinerFun/src/main/java/com/happyspace/combiner/QueueWrapper.java">
           <value>
             <set />
           </value>

@@ -28,6 +28,7 @@ node_modules
 # dist directory
 dist
 .tmp
+json-server
 
 # bower
 bower_components

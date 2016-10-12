@@ -13,7 +13,8 @@ var gulp = require('gulp'),
     rev = require('gulp-rev'),
     browserSync = require('browser-sync'),
     del = require('del'),
-    ngannotate = require('gulp-ng-annotate');
+    ngannotate = require('gulp-ng-annotate'),
+    debug = require('gulp-debug');
 
 gulp.task('jshint', function() {
     return gulp.src('app/scripts/**/*.js')
@@ -28,7 +29,7 @@ gulp.task('clean', function() {
 
 // Default task
 gulp.task('default', ['clean'], function() {
-    gulp.start('usemin', 'usemin-main', 'usemin-dd', 'imagemin','copyfonts');
+    gulp.start('usemin', 'imagemin','copyfonts', 'copyviews');
 });
 
 gulp.task('usemin',['jshint'], function () {
@@ -40,23 +41,6 @@ gulp.task('usemin',['jshint'], function () {
         .pipe(gulp.dest('dist/'));
 });
 
-gulp.task('usemin-main',['jshint'], function () {
-    return gulp.src('./app/**/menu.html')
-        .pipe(usemin({
-            css:[minifycss(),rev()],
-            js: [ngannotate(),uglify(),rev()]
-        }))
-        .pipe(gulp.dest('dist/'));
-});
-
-gulp.task('usemin-dd',['jshint'], function () {
-    return gulp.src('./app/**/dishdetail.html')
-        .pipe(usemin({
-            css:[minifycss(),rev()],
-            js: [ngannotate(),uglify(),rev()]
-        }))
-        .pipe(gulp.dest('dist/'));
-});
 
 // Images
 gulp.task('imagemin', function() {
@@ -66,12 +50,28 @@ gulp.task('imagemin', function() {
         .pipe(notify({ message: 'Images task complete' }));
 });
 
-gulp.task('copyfonts', ['clean'], function() {
+gulp.task('copyfonts', function() {
     gulp.src('./bower_components/font-awesome/fonts/**/*.{ttf,woff,eof,svg}*')
         .pipe(gulp.dest('./dist/fonts'));
     gulp.src('./bower_components/bootstrap/dist/fonts/**/*.{ttf,woff,eof,svg}*')
         .pipe(gulp.dest('./dist/fonts'));
 });
+
+// copy views
+gulp.task(
+    'copyviews', function () {
+        return del(['dist/views']), gulp.src('app/views/**/*.html')
+            .pipe(gulp.dest('./dist/views'));
+    }
+);
+
+gulp.task(
+    'move', function () {
+        return del(['app/json-server/public']), gulp.src('dist/**/*.*')
+            .pipe(debug({title: 'unicorn:'}))
+            .pipe(gulp.dest('json-server/public'))
+    }
+);
 
 // Watch
 gulp.task('watch', ['browser-sync'], function() {
@@ -94,7 +94,7 @@ gulp.task('browser-sync', ['default'], function () {
     browserSync.init(files, {
         server: {
             baseDir: "dist",
-            index: "menu.html"
+            index: "index.html"
         }
     });
     // Watch any files in dist/, reload on change
